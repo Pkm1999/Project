@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function createRequest()
+        {
+            alert("hii");
+            ajax = createAjaxObject();
+            alert(ajax);
+
+            var url = "http://localhost:8081/msg?name=" + document.f1.name.value;
+            ajax.open('GET', url, true);
+            ajax.send("");
+
+            ajax.onreadystatechange = updatePage;
+
+        }
+        function createAjaxObject() {
+            try {
+                var ajax = new XMLHttpRequest();
+                return ajax;
+            }
+            catch (e) {
+                alert("Ajax Object Not Created");
+            }
+        }
+        function updatePage() {
+            //alert(ajax.readyState);
+           // alert("In update Page");
+            if (ajax.readyState == 4) {
+                //document.getElementById("loc").innerHTML = ajax.responseHTML;
+                document.getElementById("loc").innerHTML = ajax.responseText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form name="f1">
+        Enter Name :
+        <input type="text" name="name" /><br />
+        <input type="button" onclick="createRequest()" value="Login" />
+    </form>
+    <div id="loc"></div>
+</body>
+</html>
